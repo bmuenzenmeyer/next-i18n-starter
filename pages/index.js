@@ -3,9 +3,11 @@ import { useRouter } from "next/router"
 import Header from "@components/Header"
 import rosetta from "../content/translations"
 
-export default function Home() {
+export default async function Home() {
   const { locale } = useRouter()
-  const t = rosetta(locale)
+  console.log(8, rosetta, locale)
+  const t = await rosetta(locale)
+  console.log(9, t)
 
   return <Header title={t.hello} />
 }

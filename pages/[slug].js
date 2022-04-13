@@ -4,7 +4,7 @@ import { MDXRemote } from "next-mdx-remote"
 import { serialize } from "next-mdx-remote/serialize"
 // import Link from "next/link"
 import path from "path"
-import { POSTS_PATH } from "../utils/mdxUtils"
+import { POSTS_PATH, postFilePaths } from "../utils/mdxUtils"
 
 import { useRouter } from "next/router"
 
@@ -34,30 +34,6 @@ export default function Post({ source, frontMatter }) {
   )
 }
 
-// export default function PostPage({ source, frontMatter }) {
-//   console.log(14, source)
-//   return (
-//     <>
-//       <header>
-//         <nav>
-//           <Link href="/">
-//             <a>👈 Go back home</a>
-//           </Link>
-//         </nav>
-//       </header>
-//       <div className="post-header">
-//         <h1>{frontMatter.title}</h1>
-//         {frontMatter.description && (
-//           <p className="description">{frontMatter.description}</p>
-//         )}
-//       </div>
-//       <main>
-//         <MDXRemote {...source} components={components} />
-//       </main>
-//     </>
-//   )
-// }
-
 export const getStaticProps = async ({ params, locale }) => {
   console.log(37, params, locale)
   const postFilePath = path.join(POSTS_PATH, locale, `${params.slug}.mdx`)
@@ -85,9 +61,10 @@ export const getStaticProps = async ({ params, locale }) => {
 
 export const getStaticPaths = async ({ locales }) => {
   console.log(61, locales)
-  // console.log(61, POSTS_PATH)
+  console.log(61, POSTS_PATH)
 
   const posts = ["hello"]
+  console.log(67, postFilePaths)
 
   const localePaths = locales.map((locale) => locale)
 
@@ -95,8 +72,11 @@ export const getStaticPaths = async ({ locales }) => {
 
   const finalPaths = localePaths.map((locale) => {
     console.log(89, locale)
-    return posts.map((post) => {
-      console.log(91, post, locale)
+    return postFilePaths.map((post) => {
+      return post.split('.')[0]
+    })
+      .map((post) => {
+        console.log(91, post, locale)
       return { params: { slug: post, locale } }
     })
   })
