@@ -19,14 +19,12 @@ export default function Post({ source, frontMatter }) {
   // initially until getStaticProps() finishes running
   if (isFallback) {
     console.log("fallback")
-    return <div>Loading...</div>
+    return <div>...</div>
   }
 
   return (
     <>
-      <h1>{frontMatter.title}</h1>
-      <div>{asPath}</div>
-      <div>{locale}</div>
+      <h2>{frontMatter.title}</h2>
       <main>
         <MDXRemote {...source} components={components} />
       </main>
@@ -72,13 +70,14 @@ export const getStaticPaths = async ({ locales }) => {
 
   const finalPaths = localePaths.map((locale) => {
     console.log(89, locale)
-    return postFilePaths.map((post) => {
-      return post.split('.')[0]
-    })
+    return postFilePaths
+      .map((post) => {
+        return post.split(".")[0]
+      })
       .map((post) => {
         console.log(91, post, locale)
-      return { params: { slug: post, locale } }
-    })
+        return { params: { slug: post, locale } }
+      })
   })
 
   console.log(66, finalPaths)

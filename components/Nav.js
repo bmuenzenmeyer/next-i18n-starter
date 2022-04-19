@@ -1,21 +1,36 @@
+import { useEffect, useState } from "react"
+
 import Link from "next/link"
 import { useRouter } from "next/router"
 
 import rosetta from "../content/translations"
 import LocaleSwitcher from "@components/LocaleSwitcher"
 
-export default function Home() {
+export default function Nav() {
   const { locale } = useRouter()
   const t = rosetta(locale)
+  const [translations, setTranslations] = useState({})
+
+  useEffect(() => {
+    const fetchTranslation = async () => {
+      const ts = await t
+      setTranslations(ts)
+    }
+    fetchTranslation()
+  }, [locale])
+
+  if (!translations) {
+    return <>...</>
+  }
 
   return (
     <nav>
       <Link href="/">
-        <a>{t.home}</a>
+        <a>{translations?.nav?.home}</a>
       </Link>{" "}
       |{" "}
       <Link href="/hello">
-        <a>{t.hello}</a>
+        <a>{translations?.nav?.hello}</a>
       </Link>
       <LocaleSwitcher />
     </nav>

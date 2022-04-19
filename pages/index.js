@@ -1,13 +1,17 @@
-import { useRouter } from "next/router"
-
-import Header from "@components/Header"
 import rosetta from "../content/translations"
 
-export default async function Home() {
-  const { locale } = useRouter()
-  console.log(8, rosetta, locale)
-  const t = await rosetta(locale)
-  console.log(9, t)
+export default function Home({ translations }) {
+  return <>{translations.welcome}</>
+}
 
-  return <Header title={t.hello} />
+export async function getStaticProps(context) {
+  console.log(16, context)
+
+  const translations = await rosetta(context.locale)
+  console.log(14, translations)
+  return {
+    props: {
+      translations,
+    }, // will be passed to the page component as props
+  }
 }

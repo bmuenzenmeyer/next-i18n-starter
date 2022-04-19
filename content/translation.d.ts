@@ -1,4 +1,9 @@
+export type Nav = {
+  home: string,
+  hello: string,
+}
+
 export type Translation = {
-    home: string,
-    hello: string,
+    nav: Nav,
+    welcome: string,
   }

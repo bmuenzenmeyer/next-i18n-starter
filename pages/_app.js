@@ -7,10 +7,10 @@ function Application({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Next.js Starter!</title>
+        <title>Site</title>
       </Head>
       <Nav />
-      <main className="container">
+      <main>
         <Component {...pageProps} />
       </main>
     </>
