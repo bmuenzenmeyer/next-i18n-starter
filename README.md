@@ -1,17 +1,36 @@
 # Next i18n Starter
 
-This is a [Next.js](https://nextjs.org/) Template implementing [Internationalization (i18n)](https://nextjs.org/docs/advanced-features/i18n-routing). I wrote this because I found it hard to string all the demo and docs together what resembles a fully functioning website.
+This is a [Next.js](https://nextjs.org/) Template implementing [Internationalization (i18n)](https://nextjs.org/docs/advanced-features/i18n-routing).
+
+> I wrote this because I found it hard to compose all the demos and docs together into resembles a fully functioning content-centric website.
 
 ## Features To Consider ✨
 
-This template is suitable for small to medium content-centric websites. It:
+This template:
 
--   relies on local MDX files. Put your long-form content in any locale
--   doesn't choose one of the 5 i18n libraries Next shortlists. Instead, it [creates its own translation API](https://xkcd.com/927/) 😅.
--   Implements gentle TypeScript hinting to ensure consistent translation across locales.
--   Available locales are dynamically loaded from `next.config.js`
+- relies on local MDX files. Put your long-form content in any locale. This might be a deal-breaker for you.
+- doesn't choose one of the [5 i18n libraries](https://nextjs.org/docs/advanced-features/i18n-routing) Next shortlists. Instead, it [creates its own translation API](https://xkcd.com/927/) 😅. Replace it if you need something more robust.
+- implements gentle TypeScript hinting to ensure consistent translation across locales. (see below)
+- doesn't make any choices about your styling solution. [Bikeshed](http://phk.freebsd.dk/sagas/bikeshed/) away.
 
-## Translations
+## Translations 💬
+
+Current locales are defined within `next.config.js`:
+
+<!-- CODEBLOCK_START {"value": "next.config.js"} -->
+<!-- prettier-ignore -->
+~~~~~~~~~~js
+File: next.config.js
+
+module.exports = {
+  i18n: {
+    locales: ["en", "es"],
+    defaultLocale: "en",
+  },
+}
+~~~~~~~~~~
+
+<!-- CODEBLOCK_END -->
 
 The `content/` directory contains a TypeScript definition file ensuring you never miss mapping a new value.
 
@@ -33,6 +52,13 @@ export type Translation = {
 
 <!-- CODEBLOCK_END -->
 
+### Adding a New Locale 🆕
+
+1. Add the locale to `next.config.js`
+1. Add a new locale directory under `/content`
+1. Add `translation.ts` under the new locale directory, implementing the `Translation` type.
+1. Add any long-form MDX content you wish to author.
+
 ## Development Getting Started 🚀
 
 Node environment:
@@ -45,9 +71,9 @@ File: .nvmrc
 v16.14.2
 ~~~~~~~~~~
 
-> Use a tool like [nvm](https://github.com/nvm-sh/nvm) or [volta](https://volta.sh/) to manage Node versions.
-
 <!-- CODEBLOCK_END -->
+
+> Use a tool like [nvm](https://github.com/nvm-sh/nvm) or [volta](https://volta.sh/) to manage Node versions.
 
 Install dependencies:
 
@@ -77,10 +103,10 @@ npm run dev
 
 I composed some resources to get this far. Thank you to:
 
--   :heart: [Next Netlify Starter](https://github.com/netlify-templates/next-netlify-starter) - from which these docs are derived
--   🌐 [Next i18n-routing example](https://github.com/vercel/next.js/tree/canary/examples/i18n-routing) - for the LocaleSwitcher
--   📦 [Next MDX Remote](https://github.com/hashicorp/next-mdx-remote) via [Albert Barsegyan's demo](https://medium.com/@albert_barsegyan/i18n-internationalization-with-next-js-and-markdown-6477d818e906)
+- :heart: [Next Netlify Starter](https://github.com/netlify-templates/next-netlify-starter) - from which these docs are derived
+- 🌐 [Next i18n-routing example](https://github.com/vercel/next.js/tree/canary/examples/i18n-routing) - for the LocaleSwitcher
+- 📦 [Next MDX Remote](https://github.com/hashicorp/next-mdx-remote) via [Albert Barsegyan's demo](https://medium.com/@albert_barsegyan/i18n-internationalization-with-next-js-and-markdown-6477d818e906)
 
 ## Alternatives 🤔
 
--   [nextjs-i18n-static-page-starter](https://github.com/Xairoo/nextjs-i18n-static-page-starter) - Consider this if you want Tailwind and i18next baked into your experience.
+- [nextjs-i18n-static-page-starter](https://github.com/Xairoo/nextjs-i18n-static-page-starter) - Consider this if you want Tailwind and i18next baked into your experience.
