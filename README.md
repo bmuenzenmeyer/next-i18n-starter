@@ -91,11 +91,11 @@ npm run dev
 
 **Option one:** One-click deploy
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/bmuenzenmeyer/next-i18n-starter)
 
 **Option two:** Manual clone
 
-1. Clone this repo: `git clone https://github.com/netlify-templates/next-netlify-starter.git`
+1. Clone this repo: `git clone git@github.com:bmuenzenmeyer/next-i18n-starter.git`
 2. Navigate to the directory and run `npm ci`
 3. Run `npm run dev`
 
