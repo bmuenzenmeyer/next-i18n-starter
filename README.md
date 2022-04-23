@@ -89,9 +89,9 @@ npm run dev
 
 ### Installation options 🚧
 
-**Option one:** One-click deploy
+**Option one:** One-click deploy to Vercel
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/bmuenzenmeyer/next-i18n-starter)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fbmuenzenmeyer%2Fnext-i18n-starter)
 
 **Option two:** Manual clone
 
@@ -106,6 +106,7 @@ I composed some resources to get this far. Thank you to:
 - :heart: [Next Netlify Starter](https://github.com/netlify-templates/next-netlify-starter) - from which these docs are derived
 - 🌐 [Next i18n-routing example](https://github.com/vercel/next.js/tree/canary/examples/i18n-routing) - for the LocaleSwitcher
 - 📦 [Next MDX Remote](https://github.com/hashicorp/next-mdx-remote) via [Albert Barsegyan's demo](https://medium.com/@albert_barsegyan/i18n-internationalization-with-next-js-and-markdown-6477d818e906)
+- 🔺 [Vercel](https://vercel.com/) for easy and free hosting supporting Server-Side Rendering
 
 ## Alternatives 🤔
 
