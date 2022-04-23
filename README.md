@@ -2,7 +2,7 @@
 
 This is a [Next.js](https://nextjs.org/) Template implementing [Internationalization (i18n)](https://nextjs.org/docs/advanced-features/i18n-routing).
 
-> I wrote this because I found it hard to compose all the demos and docs together into resembles a fully functioning content-centric website.
+> I wrote this because I found it hard to compose all the demos and docs together into what resembled a fully functioning content-centric website.
 
 ## Features To Consider ✨
 
