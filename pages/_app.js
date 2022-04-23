@@ -1,5 +1,5 @@
-import "@styles/globals.css"
-import Nav from "@components/Nav"
+import "@styles/globals.css";
+import Nav from "@components/Nav";
 
 function Application({ Component, pageProps }) {
   return (
@@ -9,7 +9,7 @@ function Application({ Component, pageProps }) {
         <Component {...pageProps} />
       </main>
     </>
-  )
+  );
 }
 
-export default Application
+export default Application;

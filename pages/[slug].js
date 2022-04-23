@@ -12,60 +12,60 @@ import { CONTENT_PATH, POST_FILE_PATHS } from "../utils/mdx";
 const components = {};
 
 export default function Post({ source, frontMatter }) {
-    const { isFallback } = useRouter();
+  const { isFallback } = useRouter();
 
-    if (isFallback) {
-        return <div>...</div>;
-    }
+  if (isFallback) {
+    return <div>...</div>;
+  }
 
-    return (
-        <>
-            <Head>
-                <title>{`${frontMatter.title}`}</title>
-            </Head>
-            <h2>{frontMatter.title}</h2>
-            <MDXRemote {...source} components={components} />
-        </>
-    );
+  return (
+    <>
+      <Head>
+        <title>{`${frontMatter.title}`}</title>
+      </Head>
+      <h2>{frontMatter.title}</h2>
+      <MDXRemote {...source} components={components} />
+    </>
+  );
 }
 
 export const getStaticProps = async ({ params, locale }) => {
-    const postFilePath = path.join(CONTENT_PATH, locale, `${params.slug}.mdx`);
-    const source = fs.readFileSync(postFilePath);
+  const postFilePath = path.join(CONTENT_PATH, locale, `${params.slug}.mdx`);
+  const source = fs.readFileSync(postFilePath);
 
-    const { content, data } = matter(source);
+  const { content, data } = matter(source);
 
-    const mdxSource = await serialize(content, {
-        mdxOptions: {
-            remarkPlugins: [],
-            rehypePlugins: [],
-        },
-        scope: data,
-    });
+  const mdxSource = await serialize(content, {
+    mdxOptions: {
+      remarkPlugins: [],
+      rehypePlugins: [],
+    },
+    scope: data,
+  });
 
-    return {
-        props: {
-            source: mdxSource,
-            frontMatter: data,
-        },
-    };
+  return {
+    props: {
+      source: mdxSource,
+      frontMatter: data,
+    },
+  };
 };
 
 export const getStaticPaths = async ({ locales }) => {
-    const localePaths = locales.map((locale) => locale);
+  const localePaths = locales.map((locale) => locale);
 
-    const finalPaths = localePaths.map((locale) => {
-        return POST_FILE_PATHS.map((post) => {
-            return post.split(".")[0];
-        }).map((post) => {
-            return { params: { slug: post, locale } };
-        });
+  const finalPaths = localePaths.map((locale) => {
+    return POST_FILE_PATHS.map((post) => {
+      return post.split(".")[0];
+    }).map((post) => {
+      return { params: { slug: post, locale } };
     });
+  });
 
-    const forReal = [...finalPaths].flat();
+  const forReal = [...finalPaths].flat();
 
-    return {
-        paths: forReal,
-        fallback: true,
-    };
+  return {
+    paths: forReal,
+    fallback: true,
+  };
 };
