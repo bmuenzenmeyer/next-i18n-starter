@@ -1,39 +1,86 @@
-# Next + Netlify Starter
+# Next i18n Starter
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/46648482-644c-4c80-bafb-872057e51b6b/deploy-status)](https://app.netlify.com/sites/next-dev-starter/deploys)
+This is a [Next.js](https://nextjs.org/) Template implementing [Internationalization (i18n)](https://nextjs.org/docs/advanced-features/i18n-routing). I wrote this because I found it hard to string all the demo and docs together what resembles a fully functioning website.
 
-This is a [Next.js](https://nextjs.org/) v12 project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and set up to be instantly deployed to [Netlify](https://url.netlify.com/SyTBPVamO)!
+## Features To Consider ✨
 
-This project is a very minimal starter that includes 2 sample components, a global stylesheet, a `netlify.toml` for deployment, and a `jsconfig.json` for setting up absolute imports and aliases. It also includes the [Essential Next.js Build Plugin](https://github.com/netlify/netlify-plugin-nextjs), which will allow for you to implement features like Preview Mode, server-side rendering/incremental static regeneration via Netlify Functions, and internationalized routing.
+This template is suitable for small to medium content-centric websites. It:
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
+-   relies on local MDX files. Put your long-form content in any locale
+-   doesn't choose one of the 5 i18n libraries Next shortlists. Instead, it [creates its own translation API](https://xkcd.com/927/) 😅.
+-   Implements gentle TypeScript hinting to ensure consistent translation across locales.
+-   Available locales are dynamically loaded from `next.config.js`
 
-(If you click this button, it will create a new repo for you that looks exactly like this one, and sets that repo up immediately for deployment on Netlify)
+## Translations
 
-## Getting Started
+The `content/` directory contains a TypeScript definition file ensuring you never miss mapping a new value.
 
-First, run the development server:
+<!-- CODEBLOCK_START {"value": "content/translation.d.ts"} -->
+<!-- prettier-ignore -->
+~~~~~~~~~~ts
+File: content\translation.d.ts
+
+export type Nav = {
+  home: string,
+  chapter1: string,
+}
+
+export type Translation = {
+    nav: Nav,
+    welcome: string,
+  }
+~~~~~~~~~~
+
+<!-- CODEBLOCK_END -->
+
+## Development Getting Started 🚀
+
+Node environment:
+
+<!-- CODEBLOCK_START {"value": ".nvmrc"} -->
+<!-- prettier-ignore -->
+~~~~~~~~~~bash
+File: .nvmrc
+
+v16.14.2
+~~~~~~~~~~
+
+> Use a tool like [nvm](https://github.com/nvm-sh/nvm) or [volta](https://volta.sh/) to manage Node versions.
+
+<!-- CODEBLOCK_END -->
+
+Install dependencies:
+
+```
+npm ci
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-### Installation options
+### Installation options 🚧
 
 **Option one:** One-click deploy
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter)
 
 **Option two:** Manual clone
 
 1. Clone this repo: `git clone https://github.com/netlify-templates/next-netlify-starter.git`
-2. Navigate to the directory and run `npm install`
+2. Navigate to the directory and run `npm ci`
 3. Run `npm run dev`
-4. Make your changes
-5. Connect to [Netlify](https://url.netlify.com/Bk4UicocL) manually (the `netlify.toml` file is the one you'll need to make sure stays intact to make sure the export is done and pointed to the right stuff)
+
+## Prior Art 🎨
+
+I composed some resources to get this far. Thank you to:
+
+-   :heart: [Next Netlify Starter](https://github.com/netlify-templates/next-netlify-starter) - from which these docs are derived
+-   🌐 [Next i18n-routing example](https://github.com/vercel/next.js/tree/canary/examples/i18n-routing) - for the LocaleSwitcher
+-   📦 [Next MDX Remote](https://github.com/hashicorp/next-mdx-remote) via [Albert Barsegyan's demo](https://medium.com/@albert_barsegyan/i18n-internationalization-with-next-js-and-markdown-6477d818e906)
+
+## Alternatives 🤔
+
+-   [nextjs-i18n-static-page-starter](https://github.com/Xairoo/nextjs-i18n-static-page-starter) - Consider this if you want Tailwind and i18next baked into your experience.

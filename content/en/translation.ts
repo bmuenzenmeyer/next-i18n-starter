@@ -3,9 +3,9 @@ import { Translation } from "content/translation"
 const translation: Translation = {
     nav: {
         home: 'Home',
-        hello: 'Hello'
+        chapter1: 'Chapter I'
     },
-    welcome: 'Welcome to the site!'
+    welcome: 'Don Quixote'
 }
 
 export default translation

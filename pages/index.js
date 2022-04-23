@@ -1,17 +1,23 @@
-import rosetta from "../content/translations"
+import Head from "next/head"
 
-export default function Home({ translations }) {
-  return <>{translations.welcome}</>
+import translations from "../content/translations"
+
+export default function Home({ t }) {
+  return (
+    <>
+      <Head>
+        <title>{t?.nav?.home}</title>
+      </Head>
+      {t?.welcome}
+    </>
+  )
 }
 
 export async function getStaticProps(context) {
-  console.log(16, context)
-
-  const translations = await rosetta(context.locale)
-  console.log(14, translations)
+  const translation = await translations(context.locale)
   return {
     props: {
-      translations,
-    }, // will be passed to the page component as props
+      t: translation,
+    },
   }
 }

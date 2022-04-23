@@ -1,6 +1,6 @@
 export type Nav = {
   home: string,
-  hello: string,
+  chapter1: string,
 }
 
 export type Translation = {

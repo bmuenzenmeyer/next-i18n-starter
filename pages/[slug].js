@@ -1,92 +1,71 @@
-import fs from "fs"
-import matter from "gray-matter"
-import { MDXRemote } from "next-mdx-remote"
-import { serialize } from "next-mdx-remote/serialize"
-// import Link from "next/link"
-import path from "path"
-import { POSTS_PATH, postFilePaths } from "../utils/mdxUtils"
+import fs from "fs";
+import path from "path";
 
-import { useRouter } from "next/router"
+import matter from "gray-matter";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { MDXRemote } from "next-mdx-remote";
+import { serialize } from "next-mdx-remote/serialize";
 
-// here.
-const components = {}
+import { CONTENT_PATH, POST_FILE_PATHS } from "../utils/mdx";
+
+const components = {};
 
 export default function Post({ source, frontMatter }) {
-  const { asPath, locale, isFallback } = useRouter()
-  console.log(asPath, locale)
+    const { isFallback } = useRouter();
 
-  // If the page is not yet generated, this will be displayed
-  // initially until getStaticProps() finishes running
-  if (isFallback) {
-    console.log("fallback")
-    return <div>...</div>
-  }
+    if (isFallback) {
+        return <div>...</div>;
+    }
 
-  return (
-    <>
-      <h2>{frontMatter.title}</h2>
-      <main>
-        <MDXRemote {...source} components={components} />
-      </main>
-    </>
-  )
+    return (
+        <>
+            <Head>
+                <title>{`${frontMatter.title}`}</title>
+            </Head>
+            <h2>{frontMatter.title}</h2>
+            <MDXRemote {...source} components={components} />
+        </>
+    );
 }
 
 export const getStaticProps = async ({ params, locale }) => {
-  console.log(37, params, locale)
-  const postFilePath = path.join(POSTS_PATH, locale, `${params.slug}.mdx`)
-  const source = fs.readFileSync(postFilePath)
+    const postFilePath = path.join(CONTENT_PATH, locale, `${params.slug}.mdx`);
+    const source = fs.readFileSync(postFilePath);
 
-  console.log(39, postFilePath, source)
+    const { content, data } = matter(source);
 
-  const { content, data } = matter(source)
+    const mdxSource = await serialize(content, {
+        mdxOptions: {
+            remarkPlugins: [],
+            rehypePlugins: [],
+        },
+        scope: data,
+    });
 
-  const mdxSource = await serialize(content, {
-    mdxOptions: {
-      remarkPlugins: [],
-      rehypePlugins: [],
-    },
-    scope: data,
-  })
-
-  return {
-    props: {
-      source: mdxSource,
-      frontMatter: data,
-    },
-  }
-}
+    return {
+        props: {
+            source: mdxSource,
+            frontMatter: data,
+        },
+    };
+};
 
 export const getStaticPaths = async ({ locales }) => {
-  console.log(61, locales)
-  console.log(61, POSTS_PATH)
+    const localePaths = locales.map((locale) => locale);
 
-  const posts = ["hello"]
-  console.log(67, postFilePaths)
+    const finalPaths = localePaths.map((locale) => {
+        return POST_FILE_PATHS.map((post) => {
+            return post.split(".")[0];
+        }).map((post) => {
+            return { params: { slug: post, locale } };
+        });
+    });
 
-  const localePaths = locales.map((locale) => locale)
+    const forReal = [...finalPaths].flat();
 
-  console.log({ localePaths })
-
-  const finalPaths = localePaths.map((locale) => {
-    console.log(89, locale)
-    return postFilePaths
-      .map((post) => {
-        return post.split(".")[0]
-      })
-      .map((post) => {
-        console.log(91, post, locale)
-        return { params: { slug: post, locale } }
-      })
-  })
-
-  console.log(66, finalPaths)
-
-  const forReal = [...finalPaths].flat()
-  console.log(67, forReal)
-
-  return {
-    paths: forReal,
-    fallback: true,
-  }
-}
+    return {
+        paths: forReal,
+        fallback: true,
+    };
+};
